@@ -1,42 +1,14 @@
 "use strict";
-let num1 = document.getElementById('num1');
-let num2 = document.getElementById('num2');
-let sbtBtn = document.querySelector('button');
-// add function
-function add(num1, num2) {
-    if (typeof num1 === 'number' && typeof num2 === 'number') {
-        return num1 + num2;
-    }
-    else if (typeof num1 === 'string' && typeof num2 === "string") {
-        return num1 + '' + num2;
-    }
-    else {
-        return +num1 + +num2;
-    }
-}
-// arrays
-let stringResult = [];
-let numResult = [];
-//object
-function printResult(resultobj) {
-    console.log(resultobj.val);
-}
-//button 
-sbtBtn.addEventListener('click', () => {
-    const num1value = num1.value;
-    const num2value = num2.value;
-    const numbervalue = add(+num1value, +num2value);
-    numResult.push(numbervalue);
-    const stringvalue = add(num1value, num2value);
-    stringResult.push(stringvalue);
-    printResult({ val: numbervalue, timestamp: new Date() });
-    console.log(stringResult, numResult);
-});
-const myPromise = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve('it worked');
-    }, 1000);
-});
-myPromise.then((result) => {
-    console.log(result.split('w'));
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const todos_1 = __importDefault(require("./routes/todos"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const app = (0, express_1.default)();
+app.use(body_parser_1.default.json());
+app.use(todos_1.default);
+app.listen(3000, 'localhost', () => {
+    console.log(`Server is running on port ${3000}`);
 });
